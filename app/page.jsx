@@ -2,6 +2,7 @@
 
 import { getData } from "@/lib/api"
 import { useEffect, useState } from "react";
+import Card from "@/components/houseCard/Card"
 
 export default function Home() {
 	const [data, setData] = useState([])
@@ -15,11 +16,15 @@ export default function Home() {
 		})
 	}, [])
 
-	console.log(data)
+	// console.log(data)
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<h1>Welcome to Booking with Next.js</h1>
+		<main className="min-h-screen p-24">
+			<section className="flex flex-wrap gap-4">
+			{data?.map((record) => (
+				<Card key={record.id} record={record}/>
+			))}
+			</section>
 		</main>
 	);
 }
