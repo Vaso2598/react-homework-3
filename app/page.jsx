@@ -2,7 +2,7 @@
 
 import { getData } from "@/lib/api"
 import { useEffect, useState } from "react";
-import Card from "@/components/houseCard/Card"
+import Card from "@/components/card/Card"
 
 export default function Home() {
 	const [data, setData] = useState([])
@@ -20,7 +20,7 @@ export default function Home() {
 
 	return (
 		<main className="min-h-screen p-24">
-			<section className="flex flex-wrap gap-4">
+			<section className="flex flex-wrap gap-4 justify-center">
 			{data?.map((record) => (
 				<Card key={record.id} record={record}/>
 			))}
