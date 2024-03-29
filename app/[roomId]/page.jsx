@@ -4,7 +4,7 @@ import {getData} from "@/lib/api";
 import {useEffect, useState} from "react";
 import Card from "@/components/card/Card";
 
-export default function Home() {
+export default function Room() {
 	const [data, setData] = useState([]);
 	useEffect(() => {
 		getData("records?limit=20")

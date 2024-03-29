@@ -6,12 +6,14 @@ import DropdownMenu from "./Dropdown";
 const Header = () => {
 	return (
 		<header className="sticky top-0 bg-slate-50">
-			<nav className="flex justify-between px-10 py-2 items-center w-screen">
-				<Link href="/">
-					<Image src="/svg/airbnb-ar21.svg" width={102} height={32} alt="airbnb logo" />
-				</Link>
-				<div>
-					<ul className="flex justify-between gap-4">
+			<nav className="grid grid-cols-12 px-10 py-2 items-center w-screen">
+				<div className="col-start-1">
+					<Link href="/">
+						<Image src="/svg/airbnb-ar21.svg" width={102} height={32} alt="airbnb logo" />
+					</Link>
+				</div>
+				<div className="col-start-5 col-span-5">
+					<ul className="flex">
 						<li className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
 							<Link href="/">Stays</Link>
 						</li>
@@ -23,34 +25,35 @@ const Header = () => {
 						</li>
 					</ul>
 				</div>
-				<div className="flex gap-4 items-center">
-					<Link href="/" className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
-						Airbnb your home
-					</Link>
-					<button className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
-						<Image src="/svg/globe-2-svgrepo-com.svg" width={16} height={16} alt="Language" />
-					</button>
-					<DropdownMenu />
+				<div className="col-start-10 col-span-4">
+					<div className="flex items-center">
+						<Link href="/" className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
+							Airbnb your home
+						</Link>
+						<button className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
+							<Image src="/svg/globe-2-svgrepo-com.svg" width={16} height={16} alt="Language" />
+						</button>
+						<DropdownMenu />
+					</div>
 				</div>
 			</nav>
-			<div className="flex justify-center">
-				<div className="flex justify-between items-center border max-w-3xl border-neutral-300 rounded-full">
-					<div>
+			<div className="grid grid-cols-12">
+				<div className="col-start-3 col-span-8 flex justify-between items-center border border-neutral-300 rounded-full">
+					<div className="w-full">
 						<p className="hover:bg-neutral-200 py-5 px-8 rounded-full">Where</p>
 					</div>
-					<div>
+					<div className="w-full">
 						<p className="hover:bg-neutral-200 py-5 px-8 rounded-full">Check in</p>
 					</div>
-					<div>
+					<div className="w-full">
 						<p className="hover:bg-neutral-200 py-5 px-8 rounded-full">Check out</p>
 					</div>
-					<div>
-						<p className="hover:bg-neutral-200 py-5 px-8 rounded-full flex items-center">
-							Who
-							<button className="rounded-full bg-rose-500 size-12 flex justify-center items-center">
-								<Image src="/svg/search-svgrepo-com.svg" width={16} height={16} alt="Search" />
-							</button>
-						</p>
+					<div className="w-full flex justify-around items-center">
+						<p className="hover:bg-neutral-200 py-5 px-8 rounded-full flex items-center">Who</p>
+						<button className="w-28 rounded-full bg-rose-500 size-12 flex gap-2 justify-center items-center">
+							<Image src="/svg/search-svgrepo-com.svg" width={16} height={16} alt="Search" />
+							<p className="text-slate-50">Search</p>
+						</button>
 					</div>
 				</div>
 			</div>
