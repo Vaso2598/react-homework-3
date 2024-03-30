@@ -16,7 +16,7 @@ export default function Home() {
 			});
 	}, []);
 
-	// console.log(data)
+	console.log(data);
 
 	return (
 		<main className="min-h-screen p-24 bg-slate-50">
