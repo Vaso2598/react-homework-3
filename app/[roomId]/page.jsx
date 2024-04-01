@@ -6,38 +6,27 @@ import {useParams} from "next/navigation";
 import Card from "@/components/card/Card";
 
 export default function Room() {
-	const [data, setData] = useState([]);
 	const [filteredData, setFilteredData] = useState([]);
+	const params = useParams();
 	useEffect(() => {
 		getData("records?limit=20")
 			.then((data) => {
-				setData(data?.results);
+				const newData = data?.results.filter((data) => data.id === params.roomId);
+				setFilteredData(newData);
 			})
 			.catch((error) => {
 				console.error("Error:", error);
 			});
 	}, []);
 
-	// console.log(data)
-	const params = useParams();
-
-	// console.log(params);
-
-	useEffect(() => {
-		if (data.length > 0) {
-			// Filter data based on record.Id
-			const filtered = data.filter((record) => record.id === parseInt(params.roomId));
-			setFilteredData(filtered);
-		}
-	}, [data, params.roomId]);
+	console.log(filteredData);
 
 	return (
 		<main className="min-h-screen p-24 bg-slate-50">
 			<section className="flex flex-wrap gap-4 justify-center">
-				<p>{params.roomId}</p>
-				{/* Render filtered data */}
+				{/* <p>{params.roomId}</p> */}
 				{filteredData.map((record) => (
-					<Card key={record.id} data={record} />
+					<Card key={record.id} record={record} />
 				))}
 			</section>
 		</main>

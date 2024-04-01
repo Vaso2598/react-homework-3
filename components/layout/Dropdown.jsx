@@ -20,7 +20,7 @@ const DropdownMenu = () => {
 				</div>
 			</button>
 			{isOpen && (
-				<menu className="absolute w-64 py-3 right-px z-10 border border-neutral-300 rounded-lg">
+				<menu className="absolute bg-slate-50 w-64 py-3 right-px z-10 border border-neutral-300 rounded-lg">
 					<li className="hover:bg-neutral-200 px-3 py-1">
 						<Link href="/signUp" className="block">
 							Sign up
