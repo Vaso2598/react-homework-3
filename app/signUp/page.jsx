@@ -2,18 +2,31 @@
 
 import React from "react";
 import {useState} from "react";
-import Link from "next/link";
+import {auth, db} from "@/lib/firebase";
+import {createUserWithEmailAndPassword} from "firebase/auth";
+import {doc, setDoc} from "firebase/firestore";
 
-const Login = () => {
+const SignUp = () => {
 	const [email, setEmail] = useState("");
+	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
+	const [id, setId] = useState("");
 
-	console.log(email);
-	console.log(password);
-
-	const handleLogin = async ($e) => {
+	const handleSignUp = async ($e) => {
 		$e.preventDefault();
-		alert(`Email: ${email}`);
+		try {
+			const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+			const id = userCredentials.user.uid;
+
+			await setDoc(doc(db, "user", id), {
+				email,
+				userName,
+				id,
+			});
+			window.location.href = "/";
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	return (
@@ -25,7 +38,7 @@ const Login = () => {
 					</h2>
 				</div>
 				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-					<form className="space-y-6" action="#" method="POST" onSubmit={handleLogin}>
+					<form className="space-y-6" action="#" method="POST" onSubmit={handleSignUp}>
 						<div>
 							<label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
 								Email address
@@ -37,9 +50,42 @@ const Login = () => {
 									type="email"
 									autoComplete="email"
 									required
-									value={email}
 									onChange={($e) => setEmail($e.target.value)}
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6"
+								/>
+							</div>
+						</div>
+						<div>
+							<div className="flex items-center justify-between">
+								<label htmlFor="userName" className="block text-sm font-medium leading-6 text-gray-900">
+									User Name
+								</label>
+							</div>
+							<div className="mt-2">
+								<input
+									id="userName"
+									name="userName"
+									type="text"
+									autoComplete="userName"
+									required
+									onChange={($e) => setUserName($e.target.value)}
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6"
+								/>
+							</div>
+						</div>
+						<div>
+							<label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+								Personal Id
+							</label>
+							<div className="mt-2">
+								<input
+									id="id"
+									name="id"
+									type="number"
+									autoComplete="id"
+									required
+									onChange={(e) => setId(e.target.value)}
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
 						</div>
@@ -55,25 +101,6 @@ const Login = () => {
 									name="password"
 									type="password"
 									required
-									value={password}
-									onChange={($e) => setPassword($e.target.value)}
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6"
-								/>
-							</div>
-						</div>
-						<div>
-							<div className="flex items-center justify-between">
-								<label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-									Repeat your Password
-								</label>
-							</div>
-							<div className="mt-2">
-								<input
-									id="repeat-password"
-									name="repeat-password"
-									type="password"
-									required
-									value={password}
 									onChange={($e) => setPassword($e.target.value)}
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6"
 								/>
@@ -93,4 +120,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default SignUp;

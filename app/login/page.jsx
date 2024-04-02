@@ -1,19 +1,24 @@
 "use client";
 
-import React from "react";
-import {useState} from "react";
+import React, {useState} from "react";
 import Link from "next/link";
+import {auth} from "@/lib/firebase";
+import {signInWithEmailAndPassword} from "firebase/auth";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	console.log(email);
-	console.log(password);
+	const handleLogin = async (e) => {
+		e.preventDefault();
 
-	const handleLogin = async ($e) => {
-		$e.preventDefault();
-		alert(`Email: ${email}`);
+		try {
+			const userCredentials = await signInWithEmailAndPassword(auth, email, password);
+			console.log(userCredentials._tokenResponse.expiresIn);
+			sessionStorage.setItem("token", userCredentials.user.accessToken);
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	return (
