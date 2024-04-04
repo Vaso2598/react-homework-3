@@ -10,7 +10,6 @@ const SignUp = () => {
 	const [email, setEmail] = useState("");
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
-	const [id, setId] = useState("");
 
 	const handleSignUp = async ($e) => {
 		$e.preventDefault();
@@ -18,10 +17,12 @@ const SignUp = () => {
 			const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
 			const id = userCredentials.user.uid;
 
+			await updateDisplayName(auth.currentUser, userName);
+
 			await setDoc(doc(db, "user", id), {
 				email,
 				userName,
-				id,
+				displayName: userName,
 			});
 			window.location.href = "/";
 		} catch (error) {
@@ -70,22 +71,6 @@ const SignUp = () => {
 									required
 									onChange={($e) => setUserName($e.target.value)}
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rose-500 sm:text-sm sm:leading-6"
-								/>
-							</div>
-						</div>
-						<div>
-							<label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
-								Personal Id
-							</label>
-							<div className="mt-2">
-								<input
-									id="id"
-									name="id"
-									type="number"
-									autoComplete="id"
-									required
-									onChange={(e) => setId(e.target.value)}
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
 						</div>

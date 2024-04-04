@@ -1,15 +1,31 @@
-// components/DropdownMenu.js
 "use client";
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Link from "next/link";
+import {auth} from "@/lib/firebase";
 
 const DropdownMenu = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [user, setUser] = useState(null);
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
 	};
+
+	const handleLogout = async () => {
+		try {
+			await auth.signOut();
+		} catch {
+			console.error("Error signing out:", error);
+		}
+	};
+
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged((user) => {
+			setUser(user);
+		});
+		return () => unsubscribe(); // Cleanup function
+	}, []);
 
 	return (
 		<div className="relative">
@@ -22,14 +38,26 @@ const DropdownMenu = () => {
 			{isOpen && (
 				<menu className="absolute bg-slate-50 w-64 py-3 right-px z-10 border border-neutral-300 rounded-lg">
 					<li className="hover:bg-neutral-200 px-3 py-1">
-						<Link href="/signUp" className="block">
-							Sign up
-						</Link>
+						{user ? (
+							<Link href="/user" className="block">
+								{user.email || "User"}
+							</Link>
+						) : (
+							<Link href="/signUp" className="block">
+								Sign up
+							</Link>
+						)}
 					</li>
 					<li className="hover:bg-neutral-200 px-3 py-1">
-						<Link href="/login" className="block">
-							Log in
-						</Link>
+						{user ? (
+							<Link href="/" className="block" onClick={handleLogout}>
+								Log out
+							</Link>
+						) : (
+							<Link href="/login" className="block">
+								Log in
+							</Link>
+						)}
 					</li>
 					<li className="hover:bg-neutral-200 px-3 py-1">
 						<Link href="/" className="block">

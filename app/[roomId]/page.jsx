@@ -19,7 +19,7 @@ export default function Room() {
 			});
 	}, []);
 
-	console.log(filteredData);
+	// console.log(filteredData);
 
 	return (
 		<main className="min-h-screen p-24 bg-slate-50">

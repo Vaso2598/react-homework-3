@@ -3,16 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import DropdownMenu from "./Dropdown";
 
-const Header = () => {
+const Header = ({user}) => {
 	return (
 		<header className="sticky top-0 bg-slate-50">
 			<nav className="grid grid-cols-12 px-10 py-2 items-center w-screen">
-				<div className="col-start-1">
+				<div className="col-start-1 col-span-1">
 					<Link href="/">
 						<Image src="/svg/airbnb-ar21.svg" width={102} height={32} alt="airbnb logo" />
 					</Link>
 				</div>
-				<div className="col-start-5 col-span-5">
+				<div className="col-start-6 col-span-5">
 					<ul className="flex">
 						<li className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
 							<Link href="/">Stays</Link>
@@ -25,7 +25,7 @@ const Header = () => {
 						</li>
 					</ul>
 				</div>
-				<div className="col-start-10 col-span-4">
+				<div className="col-start-11 col-span-2">
 					<div className="flex items-center">
 						<Link href="/" className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
 							Airbnb your home
@@ -33,7 +33,7 @@ const Header = () => {
 						<button className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
 							<Image src="/svg/globe-2-svgrepo-com.svg" width={16} height={16} alt="Language" />
 						</button>
-						<DropdownMenu />
+						<DropdownMenu user={user} />
 					</div>
 				</div>
 			</nav>
