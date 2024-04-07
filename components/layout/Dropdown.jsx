@@ -27,6 +27,8 @@ const DropdownMenu = () => {
 		return () => unsubscribe(); // Cleanup function
 	}, []);
 
+	// console.log(user);
+
 	return (
 		<div className="relative">
 			<button onClick={toggleMenu} className="hover:drop-shadow-lg">

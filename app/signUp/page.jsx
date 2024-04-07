@@ -3,7 +3,7 @@
 import React from "react";
 import {useState} from "react";
 import {auth, db} from "@/lib/firebase";
-import {createUserWithEmailAndPassword} from "firebase/auth";
+import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {doc, setDoc} from "firebase/firestore";
 
 const SignUp = () => {
@@ -17,12 +17,12 @@ const SignUp = () => {
 			const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
 			const id = userCredentials.user.uid;
 
-			await updateDisplayName(auth.currentUser, userName);
+			await updateProfile(auth.currentUser, userName);
 
 			await setDoc(doc(db, "user", id), {
 				email,
 				userName,
-				displayName: userName,
+				displayName: {userName},
 			});
 			window.location.href = "/";
 		} catch (error) {

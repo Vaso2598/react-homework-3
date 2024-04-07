@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Link from "next/link";
 import {auth} from "@/lib/firebase";
 import {signInWithEmailAndPassword} from "firebase/auth";
@@ -8,7 +8,6 @@ import {signInWithEmailAndPassword} from "firebase/auth";
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	// const [user, setUser] = useState("");
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
@@ -23,17 +22,10 @@ const Login = () => {
 		}
 	};
 
-	// if (user) {
-	// 	console.log(user);
-	// } else {
-	// 	console.log("no user");
-	// }
-
 	return (
 		<section className="bg-slate-50">
 			<div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
-					<h2>Hello {user.email || user.displayName}</h2>
 					<h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
 						Sign in to your account
 					</h2>
