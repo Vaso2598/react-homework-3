@@ -3,7 +3,7 @@
 import {getData} from "@/lib/api";
 import {useEffect, useState} from "react";
 import {useParams} from "next/navigation";
-import Card from "@/components/card/Card";
+import Details from "@/components/roomDetails/Details";
 
 export default function Room() {
 	const [filteredData, setFilteredData] = useState([]);
@@ -22,11 +22,10 @@ export default function Room() {
 	// console.log(filteredData);
 
 	return (
-		<main className="min-h-screen p-24 bg-slate-50">
-			<section className="flex flex-wrap gap-4 justify-center">
-				{/* <p>{params.roomId}</p> */}
+		<main className="min-h-screen p-10 bg-slate-50">
+			<section className="flex">
 				{filteredData.map((record) => (
-					<Card key={record.id} record={record} />
+					<Details key={record.id} record={record} />
 				))}
 			</section>
 		</main>

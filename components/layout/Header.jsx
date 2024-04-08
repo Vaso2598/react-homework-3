@@ -5,8 +5,8 @@ import DropdownMenu from "./Dropdown";
 
 const Header = ({user}) => {
 	return (
-		<header className="sticky top-0 bg-slate-50">
-			<nav className="grid grid-cols-12 items-center w-screen px-10">
+		<header className="sticky top-0 bg-slate-50 pb-4">
+			<nav className="grid grid-cols-12 items-center w-full px-10">
 				<div className="col-start-1 col-span-1">
 					<Link href="/">
 						<Image src="/svg/airbnb-ar21.svg" width={102} height={32} alt="airbnb logo" />

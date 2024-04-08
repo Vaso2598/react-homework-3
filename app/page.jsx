@@ -19,7 +19,7 @@ export default function Home() {
 	// console.log(data);
 
 	return (
-		<main className="min-h-screen p-24 bg-slate-50">
+		<main className="min-h-screen p-10 bg-slate-50">
 			<section className="flex flex-wrap gap-4 justify-center">
 				{data?.map((record) => (
 					<Card key={record.id} record={record} />
