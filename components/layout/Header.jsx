@@ -5,7 +5,7 @@ import DropdownMenu from "./Dropdown";
 
 const Header = ({user}) => {
 	return (
-		<header className="sticky top-0 bg-slate-50 pb-4">
+		<header className="sticky top-0 bg-slate-50 pb-4 z-10">
 			<nav className="grid grid-cols-12 items-center w-full px-10">
 				<div className="col-start-1 col-span-1">
 					<Link href="/">
@@ -27,7 +27,7 @@ const Header = ({user}) => {
 				</div>
 				<div className="col-start-11 col-span-2">
 					<div className="flex items-center">
-						<Link href="/addRooms" className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
+						<Link href="/yourRooms" className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
 							Airbnb your home
 						</Link>
 						<button className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">

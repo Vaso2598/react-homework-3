@@ -3,7 +3,7 @@
 import React, {useState} from "react";
 import {collection, doc, setDoc} from "firebase/firestore";
 import {db, storage} from "@/lib/firebase";
-import {ref, uploadBytes} from "firebase/storage";
+import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 
 const userRooms = () => {
 	const [address, setAddress] = useState("");
@@ -11,12 +11,20 @@ const userRooms = () => {
 	const [guests, setGuests] = useState("");
 	const [price, setPrice] = useState("");
 	const [description, setDescription] = useState("");
-	const [image, setImage] = useState("");
+	const [image, setImage] = useState(null);
 
 	const handleSubmit = async ($e) => {
 		$e.preventDefault();
 
-		// Inputs
+		const imageURL = async () => {
+			const imageRef = ref(storage, `roomImages/${image.name}`);
+			const uploadImage = await uploadBytes(imageRef, image);
+			return getDownloadURL(uploadImage.ref);
+		};
+
+		const url = await imageURL();
+		// console.log(url);
+
 		const newRoomRef = doc(collection(db, "rooms"));
 
 		const data = {
@@ -25,15 +33,11 @@ const userRooms = () => {
 			guests,
 			price,
 			description,
+			imageURL: url,
 		};
 
 		await setDoc(newRoomRef, data);
-
-		// Images
-		const storageRef = ref(storage, "images");
-		uploadBytes(storageRef, image).then((snapshot) => {
-			console.log("Uploaded file:", snapshot.metadata.fullPath);
-		});
+		window.location.href = "/yourRooms";
 		// console.log(data);
 	};
 
