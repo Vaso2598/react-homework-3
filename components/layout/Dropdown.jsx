@@ -30,7 +30,7 @@ const DropdownMenu = () => {
 	// console.log(user);
 
 	return (
-		<div className="relative">
+		<div className="relative mt-2">
 			<button onClick={toggleMenu} className="hover:drop-shadow-lg">
 				<div className="flex justify-around w-20 h-12 border border-neutral-300 rounded-full">
 					<img src="/svg/burger-menu-svgrepo-com.svg" width="16" height="16" alt="user menu" />

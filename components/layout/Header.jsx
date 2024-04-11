@@ -6,13 +6,13 @@ import DropdownMenu from "./Dropdown";
 const Header = ({user}) => {
 	return (
 		<header className="sticky top-0 bg-slate-50 pb-4 z-10">
-			<nav className="grid grid-cols-12 items-center w-full px-10">
-				<div className="col-start-1 col-span-1">
+			<nav className="flex items-center justify-between w-full px-10">
+				<>
 					<Link href="/">
 						<Image src="/svg/airbnb-ar21.svg" width={102} height={32} alt="airbnb logo" />
 					</Link>
-				</div>
-				<div className="col-start-6 col-span-5">
+				</>
+				<>
 					<ul className="flex">
 						<li className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
 							<Link href="/">Stays</Link>
@@ -24,18 +24,24 @@ const Header = ({user}) => {
 							<Link href="/">Online Experiences</Link>
 						</li>
 					</ul>
-				</div>
-				<div className="col-start-11 col-span-2">
-					<div className="flex items-center">
-						<Link href="/yourRooms" className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
-							Airbnb your home
-						</Link>
-						<button className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
-							<Image src="/svg/globe-2-svgrepo-com.svg" width={16} height={16} alt="Language" />
-						</button>
-						<DropdownMenu user={user} />
-					</div>
-				</div>
+				</>
+				<>
+					<ul className="flex items-center">
+						<li>
+							<Link href="/yourRooms" className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
+								Airbnb your home
+							</Link>
+						</li>
+						<li>
+							<button className="hover:bg-neutral-200 px-4 py-2.5 rounded-full">
+								<Image src="/svg/globe-2-svgrepo-com.svg" width={16} height={16} alt="Language" />
+							</button>
+						</li>
+						<li>
+							<DropdownMenu user={user} />
+						</li>
+					</ul>
+				</>
 			</nav>
 			<div className="grid grid-cols-12">
 				<div className="col-start-3 col-span-8 flex justify-between items-center border border-neutral-300 rounded-full">
